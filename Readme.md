@@ -1,30 +1,54 @@
 # AdminBot: Gestión de Asistencia y Pagos
 
-AdminBot es una aplicación web integral diseñada para centros educativos. Permite el registro de asistencia y el control de pagos de estudiantes, automatizando la comunicación con los padres de familia mediante alertas de WhatsApp en tiempo real.
+Solución para centros educativos que centraliza asistencia, cobros y pagos de estudiantes, con notificaciones a acudientes vía WhatsApp. Backend en Node.js/Express con arquitectura MVC y MySQL.
 
-## Características Principales
+## Características
 
-- _Registro de Asistencia:_ Control diario de ingresos y faltas.
-- _Gestión de Pagos:_ Monitoreo de mensualidades y saldos pendientes.
-- _Alertas Automáticas:_ Envío de mensajes vía WhatsApp ante inasistencias o deudas.
-- _Dashboard Interactivo:_ Interfaz moderna para la administración de datos.
-- _Arquitectura Robusta:_ API REST propia conectada a base de datos SQL.
+- Registro de asistencias y estados diarios.
+- Gestión de cuentas por cobrar y pagos.
+- Notificaciones automáticas a acudientes.
+- API REST modular por entidad.
 
-## Stack Tecnológico
+## Arquitectura y Stack
 
-| Componente      | Tecnologías                       |
-| :-------------- | :-------------------------------- |
-| _Frontend_      | HTML5, CSS3, JavaScript           |
-| _Backend_       | Node.js, Express.js               |
-| _Base de Datos_ | SQL (MySQL / SQL Server)          |
-| _Integraciones_ | API de WhatsApp (UltraMsg / WATI) |
-| _IA Tools_      | ChatGPT, GitHub Copilot, Codeium  |
-| _Despliegue_    | Git, GitHub Pages / Replit        |
+- Node.js (ES Modules), Express 5, mysql2 (pool), cors, nodemon.
+- Patrón MVC por entidad: models, controllers, routes separados.
+- Base de datos MySQL compatible con el esquema suministrado.
 
-Sí, ahí el problema es que lo escribiste en **una sola línea**, por eso se rompe.
+## Estructura del Proyecto
 
-Usa esto (con saltos de línea bien puestos):
+- Configuración: Backend/config/db.js.
+- Modelos: estudiantes, usuarios, acudientes, pagos, asistencias, notificaciones.
+- Controladores: lógica HTTP por entidad.
+- Rutas: endpoints REST por entidad.
+- Entrada: Backend/app.js.
 
-```markdown
-## Estructura del proyecto
-```
+## Configuración Rápida
+
+- Requisitos: Node.js 18+ y un servidor MySQL.
+- Instalación: en carpeta Backend ejecutar npm install.
+- Conexión: completar credenciales en Backend/config/db.js (host, user, password, database).
+- Base de datos: crear tablas según el esquema SQL del proyecto.
+- Arranque: en Backend ejecutar npm run dev.
+
+## Endpoints Principales
+
+- Base: /api
+- Estudiantes: GET/POST /student.
+- Usuarios: GET/POST /usuario.
+- Acudientes: GET/POST /acudiente.
+- Pagos: GET/POST /pago.
+- Asistencias: GET/POST /asistencia.
+- Notificaciones: GET/POST /notificacion.
+
+## Buenas Prácticas
+
+- Validar entrada y estados antes de insertar.
+- Manejo uniforme de errores y respuestas.
+- Transacciones para operaciones financieras.
+- Timestamps consistentes y auditables.
+
+## Estado
+
+- db.js requiere credenciales reales de MySQL.
+- app.js debe montar middlewares y rutas para exponer la API.
