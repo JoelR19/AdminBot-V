@@ -1,27 +1,27 @@
 import db from '../config/db.js';
 
 export const getAll = async () => {
-  const [rows] = await db.query('SELECT * FROM usuarios');
+  const [rows] = await db.query('SELECT * FROM users');
   return rows;
 };
 
 export const create = async (data) => {
   const {
     id,
-    nombres,
-    apellidos,
-    correo,
+    first_name,
+    last_name,
+    email,
     password_hash,
-    telefono,
-    rol,
-    activo,
+    phone,
+    role,
+    is_active,
     created_at,
     updated_at
   } = data;
 
   const [result] = await db.query(
-    `INSERT INTO usuarios (id, nombres, apellidos, correo, password_hash, telefono, rol, activo, created_at, updated_at)
+    `INSERT INTO users (id, first_name, last_name, email, password_hash, phone, role, is_active, created_at, updated_at)
      VALUES (?,?,?,?,?,?,?,?,?,?)`,
-    [id, nombres, apellidos, correo, password_hash, telefono, rol, activo, created_at, updated_at]
+    [id, first_name, last_name, email, password_hash, phone, role, is_active, created_at, updated_at]
   );
 };

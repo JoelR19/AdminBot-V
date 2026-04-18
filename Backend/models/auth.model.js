@@ -1,8 +1,10 @@
 import db from "../config/db.js"
 
-export const FindUserByEmail = async (correo)=>{
+export const FindUserByEmail = async (email) => {
+  const [rows] = await db.query(
+    "SELECT id, first_name, last_name, password_hash FROM users WHERE email = ?",
+    [email]
+  );
 
-    const [rows] = await db.query("SELECT id, nombres, apellidos, password_hash FROM usuarios WHERE correo = ? ", [correo])
-
-    return rows[0];
+  return rows[0];
 }

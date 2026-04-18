@@ -8,6 +8,7 @@ import usuarioRoutes from './routes/usuarios.route.js';
 import asistenciaRoutes from './routes/asistencias.route.js';
 import notificacionRoutes from './routes/notificaciones.route.js';
 import authRoutes from "./routes/auth.route.js"
+import dashboardRoutes from "./routes/dashboard.route.js"
 
 const app = express();
 app.use(express.json())
@@ -20,6 +21,7 @@ app.use('/api', usuarioRoutes);
 app.use('/api', asistenciaRoutes);
 app.use('/api', notificacionRoutes);
 app.use("/api",authRoutes)
+app.use("/api", dashboardRoutes)
 
 //ruta base
 app.get("/", (req, res)=>{
