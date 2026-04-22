@@ -34,10 +34,10 @@ export const login = async (req,res)=>{
             ok:true,
             message:"Login exitoso",
             user: {
-                id: user.id,
-                name: user.nombres,
-                email: user.email
-            }
+    id: user.id,
+    name: user.first_name,
+    email: user.email
+}
         })
     }
     catch (err){

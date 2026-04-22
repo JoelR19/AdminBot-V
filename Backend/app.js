@@ -1,5 +1,6 @@
 import express from "express";
 import bcrypt from "bcrypt"
+import cors from "cors"
 
 import studenRoutes from './routes/students.route.js';
 import acudienteRoutes from './routes/acudientes.route.js';
@@ -11,6 +12,7 @@ import authRoutes from "./routes/auth.route.js"
 import dashboardRoutes from "./routes/dashboard.route.js"
 
 const app = express();
+app.use(cors())
 app.use(express.json())
 const PORT = 3000
 //Rutas

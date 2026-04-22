@@ -1,34 +1,46 @@
-import {request} from "../../shared/js/api.js"
-import {validarCorreo, 
-    limpiarError, 
-    mostrarError} from "../../shared/js/utils.js"
-import {guardarUsuario} from "../../shared/js/storage.js"
+import { request } from "../../shared/js/api.js";
+import { guardarUsuario } from "../../shared/js/storage.js";
+import {
+  validarCorreo,
+  mostrarError,
+  limpiarError
+} from "../../shared/js/utils.js";
 
-const form = document.getElementById('login-form');
-const email = document.getElementById('email');
-const password = document.getElementById('password');
-const error = document.getElementById('errorMessage');
-const boton = document.getElementById('button-primary');
+const form = document.querySelector(".login-form");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+const errorMessage = document.getElementById("errorMessage");
 
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-form.addEventListener("submit", async function (e) {
-    e.preventDefault()
+  limpiarError(errorMessage);
 
-    limpiarError()
+  const email = emailInput.value.trim();
+  const password = passwordInput.value.trim();
 
-    const correo = email.value.trim()
-    const clave = password.value.trim() 
+  if (!email || !password) {
+    return mostrarError(errorMessage, "Datos incompletos");
+  }
 
-    if(!validarCorreo(correo)){
-        mostrarError(error, "correo invalido");
-        return;
+  if (!validarCorreo(email)) {
+    return mostrarError(errorMessage, "Correo inválido");
+  }
+
+  try {
+    const data = await request("/login", {
+      method: "POST",
+      body: JSON.stringify({
+        email,
+        password
+      })
+    });
+
+    if (data.ok) {
+      guardarUsuario(data.user);
+      window.location.href = "../dashboard/index.html";
     }
-
-    if( clave.length < 6){
-        mostrarError(error, "la contraseña debe tener minimo 6 caracteres")
-    }
-
-    try{}
-    catch{}
-    finally{}
-})
+  } catch (error) {
+    mostrarError(errorMessage, error.message);
+  }
+});
