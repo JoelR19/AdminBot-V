@@ -52,5 +52,5 @@ app.get("/", (req, res)=>{
 
 
 app.listen(PORT, ()=>{
-    console.log("Servidor corriendo LocalHost...")
+    console.log("Servidor corriendo LocalHost...", PORT)
 })
